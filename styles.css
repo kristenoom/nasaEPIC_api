@@ -14,6 +14,14 @@
   src: url("./assets/Stardate81316-aolE.ttf");
 }
 
+/* VARIABLES */
+:root {
+  --deepPurple: #1c1026;
+  --moonDust: #c6bbb9;
+  --purple: #4c1e3c;
+  --deepGreen: #21242b;
+  --dustyBlue: #7a748c;
+}
 /* GENERAL SETUP */
 
 html,
@@ -23,7 +31,7 @@ body {
 }
 
 body {
-  background-color: #a0a0a0;
+  background-color: var(--deepPurple);
   text-align: center;
   height: 100vh; /* vertical height */
   width: 100vw; /* vertical width */
@@ -39,32 +47,42 @@ header {
 header img {
   margin-left: 0;
   margin-right: 0;
-  width: 450px;
+  height: 100px;
 }
 
 .main {
-  height: 100vh;
+  height: 80vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+p {
+  font-family: kiona-regular;
+  font-size: 12px;
+}
 
 .card {
-  background-color: #c6cacb;
+  background-color: var(--dustyBlue);
   border: none;
   /* border-radius: 10px 100px / 120px; */
+}
+
+.card-text {
+  color: var(--deepGreen);
+  font-size: 14px;
 }
 
 /* BUTTONS */
 
 .modal-footer .btn {
-  background-color: #3d434f;
+  font-family: "bank-gothic";
   margin-right: 30px;
 }
 
 .btn-dark {
-  background-color: #758b99;
+  background-color: var(--purple);
+  color: var(--moonDust);
 }
 
 /* MODAL */
@@ -79,5 +97,12 @@ header img {
 
 strong {
   font-family: "bank-gothic";
+  font-size: 14px;
   text-transform: uppercase;
+}
+
+footer {
+  color: var(--moonDust);
+  font-family: "bank-gothic";
+  margin-top: -15px;
 }

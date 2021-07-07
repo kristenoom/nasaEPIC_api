@@ -1,5 +1,5 @@
 const baseURL = 'https://api.nasa.gov/EPIC/api/natural/';
-const baseURL2 = 'https://epic.gsfc.nasa.gov/api';
+
 const key = 'zTjrFVIwtBVIENb3dJpESWDWbhRFFWa4m3AbPyO1';
 
 const card = document.querySelector('.card');
@@ -14,22 +14,22 @@ let yesterday = currentDate.setDate(currentDate.getDate() - 1);
 console.log(`Yesterday's Date: ${yesterday}`);
 
 const year = currentDate.getFullYear();
+console.log(`Year ${year}`)
 
 const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 let month = currentDate.getMonth();
 
-const days = ['01', '02', '03', '04', '05', '06', '07', '08', '09',
+const days = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09',
     '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
     '20', '21', '22', '23', '24', '25', '26', '27', '28', '29',
     '30', '31'
 ];
-let monthDay = yesterday;
-
+let monthDay = currentDate.getDate();
 
 let date = year + '/' + months[month] + '/' + days[monthDay];
-
+const photoURL = `https://epic.gsfc.nasa.gov/archive/natural/${date}/png`
 // const date = `${year}/${mm}/${dd}`;
-console.log(`Yesterday's Date: ${date}`);
+console.log(`Yesterday's Formatted Date: ${date}`);
 
 
 fetch(baseURL + '?api_key=' + key)
@@ -39,7 +39,7 @@ fetch(baseURL + '?api_key=' + key)
     function displayContext(spaceObject) {
         console.log(spaceObject); //console.log API array
 
-        let title = document.createElement('h1');
+        let title = document.createElement('h2');
         title.className = 'card-title';
         title.innerText = spaceObject[0].caption;
         title.style = 'font-family: stardate;';
@@ -68,23 +68,15 @@ fetch(baseURL + '?api_key=' + key)
         // modalTitle.style.textTransform = 'uppercase';
         modalTitle.style.fontSize = '36px';
 
-        
+        let img = document.createElement('img');
+        img.className = 'card-img-top';
+        img.src = `${photoURL}/${spaceObject[0].image}.png`;
+        console.log(`Image file: ${photoURL}/${spaceObject[0].image}.png`); //console.log image filename + .jpg
+    
+        card.insertBefore(img, cardBody);
         cardBody.insertBefore(title, moreInfoBtn);
         cardBody.insertBefore(date, moreInfoBtn);
         modalBody.appendChild(expl);
-    }
-
-fetch(baseURL + '?api_key=' + key)
-    .then(response => response.json())
-    .then(json => displayImage(json));
-
-function displayImage(spaceImage) {
-    let img = document.createElement('img');
-        img.className = 'card-img-top';
-        img.src = `${baseURL2}/natural/date/${date}/png/${spaceImage[0].image}.png`;
-        console.log(`Image file: ${baseURL2}/archive/natural/${date}/png/${spaceImage[0].image}.png`); //console.log image filename + .jpg
-    
-    card.insertBefore(img, cardBody);
 }
 
 //date
